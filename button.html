@@ -1,0 +1,30 @@
+
+<style>
+ /* CSS */
+.subscribe {
+  /* Basic styles */
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  color: white;
+  background-color: #ff9900;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  /* Box shadow */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  /* Transition for smooth animation */
+  transition: all 0.3s ease-in-out;
+}
+
+/* Active state */
+.subscribe:active {
+  /* Move the button down and reduce the shadow */
+  transform: translateY(4px);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+}   
+    
+</style>
+
+<!-- HTML -->
+<button class="subscribe">Subscribe</button>
