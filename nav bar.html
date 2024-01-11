@@ -1,119 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown Menu Example</title>
+    <style>
+        /* General Styles */
+        html, body {
+            padding: 0px; /* Removes padding from the html and body */
+            margin: 0px; /* Removes margin from the html and body */
+            background: #191A1D; /* Sets background color */
+            font-family: 'Karla', sans-serif; /* Sets the font for the entire page */
+            width: 100vw; /* Sets the width of the body to 100% of the viewport width */
+        }
+
+        body * {
+            margin: 0; /* Ensures that all elements inside the body have no margin */
+            padding: 0; /* Ensures that all elements inside the body have no padding */
+        }
+
+        /* Navigation Styles */
+        nav menuitem {
+            position: relative; /* Position relative allows absolute positioning of child elements relative to this element */
+            display: block; /* Makes menu items block level elements */
+            opacity: 0; /* Initially hides the menu items */
+            cursor: pointer; /* Changes the cursor to a pointer when hovering over the menu items */
+        }
+
+        nav menuitem > menu {
+            position: absolute; /* Positions the submenu absolutely relative to its parent */
+            pointer-events: none; /* Disables pointer events on the submenu (makes it initially non-interactive) */
+        }
+
+        nav > menu { 
+            display: flex; /* Displays the main menu items in a row using Flexbox */
+        }
+
+        nav > menu > menuitem { 
+            pointer-events: all; /* Enables pointer events for top-level menu items */
+            opacity: 1; /* Makes top-level menu items visible */
+        }
+
+        menu menuitem a { 
+            white-space: nowrap; /* Prevents text inside links from wrapping */
+            display: block; /* Makes links block level for easier interaction */
+        }
+
+        /* Hover Styles for Submenus */
+        menuitem:hover > menu {
+            pointer-events: initial; /* Enables pointer events when hovering over a menu item (makes submenu interactive) */
+        }
+
+        menuitem:hover > menu > menuitem,
+        menu:hover > menuitem{
+            opacity: 1; /* Makes submenu items visible on hover */
+        }
+
+        /* Submenu Positioning */
+        nav > menu > menuitem menuitem menu {
+            transform: translateX(100%); /* Positions the submenu to the right of the parent menu */
+            top: 0; right: 0; /* Aligns the submenu at the top right of the parent menu */
+        }
+
+        /* Additional User Styles */
+        nav { 
+            margin-top: 40px;
+            margin-left: 40px;
+        }
+
+        nav a {
+            background: #75F; /* Sets the background color of links */
+            color: #FFF; /* Sets the text color of links */
+            min-width: 190px; /* Sets a minimum width for links */
+            transition: background 0.5s, color 0.5s, transform 0.5s; /* Adds a transition effect for background, color, and transform properties */
+            margin: 0px 6px 6px 0px; /* Sets the margin around links */
+            padding: 20px 40px; /* Sets the padding inside links */
+            box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+            border-radius: 3px; /* Rounds the corners of links */
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5); /* Adds a shadow to links */
+            position: relative; /* Needed for positioning pseudo-elements */
+        }
+
+        nav a:hover:before {
+            content: ''; /* Creates a pseudo-element when hovering over a link */
+            top: 0; left: 0;
+            position: absolute; /* Positions the pseudo-element absolutely within the link */
+            background: rgba(0, 0, 0, 0.2); /* Darkens the link on hover */
+            width: 100%; /* Full width of the link */
+            height: 100%; /* Full height of the link */
+        }
+
+        /* Arrow Indicators for Submenus */
+        nav > menu > menuitem > a + menu:after {
+            content: ''; /* Creates a downward arrow */
+            position: absolute; /* Positions the arrow absolutely within the link */
+            border: 10px solid transparent; /* Creates a triangle shape */
+            border-top: 10px solid white; /* Colors the top part of the triangle */
+            left: 12px;
+            top: -40px; /* Positions the arrow above the link */
+        }
+
+        nav menuitem > menu > menuitem > a + menu:after { 
+            content: ''; /* Creates a rightward arrow for submenus */
+            position: absolute; /* Positions the arrow absolutely within the submenu link */
+            border: 10px solid transparent; /* Creates a triangle shape */
+            border-left: 10px solid white; /* Colors the left part of the triangle */
+            top: 20px;
+            left: -180px; /* Positions the arrow to the left of the submenu link */
+            transition: opacity 0.6, transform 0s; /* Adds transition effects */
+        }
+
+        /* Submenu Animation */
+        nav > menu > menuitem > menu > menuitem {
+            transition: transform 0.6s, opacity 0.6s; /* Adds a transition for transform and opacity */
+            transform: translateY(150%); /* Moves the submenu items down */
+            opacity: 0; /* Hides the submenu items */
+        }
+
+        nav > menu > menuitem:hover > menu > menuitem,
+        nav > menu > menuitem.hover > menu > menuitem {
+            transform: translateY(0%); /* Positions submenu items in place */
+            opacity: 1; /* Shows submenu items */
+        }
+
+        menuitem > menu > menuitem > menu > menuitem {
+            transition: transform 0.6s, opacity 0.6s; /* Adds a transition for transform and opacity */
+            transform: translateX(195px) translateY(0%); /* Moves the submenu items to the right */
+            opacity: 0; /* Hides submenu items */
+        }
+
+        menuitem > menu > menuitem:hover > menu > menuitem,  
+        menuitem > menu > menuitem.hover > menu > menuitem {  
+            transform: translateX(0) translateY(0%); /* Positions submenu items in place */
+            opacity: 1; /* Shows submenu items */
+        }
+    </style>
 </head>
 <body>
-
-<div id="nav">
-  <ul>
-    <li><a href="home.html">Home</a>
-      <ul>
-        <li><a href="sublink1.html">Sublink 1</a></li>
-        <li><a href="sublink2.html">Sublink 2</a></li>
-      </ul>
-    </li>
-    <li><a href="things.html">Things</a>
-      <ul>
-        <li><a href="thing1.html">Thing 1</a></li>
-        <li><a href="thing2.html">Thing 2</a></li>
-      </ul>
-    </li>
-    <!-- ... other main menu items ... -->
-  </ul>
-</div>
-
-<!-- Placeholder logos -->
-<img src="logo1.png" alt="Logo 1">
-<img src="logo2.png" alt="Logo 2">
-
-<!-- Your website content goes here -->
-
-<script>
-  const colorLookup = {
-    'vibrantOrange': '#ff9900',
-    'deepGreen': '#04AB6D',
-    'white': '#ffffff',
-    'softBlack': 'rgba(0, 0, 0, 0.5)'
-  };
-
-  document.addEventListener("DOMContentLoaded", function() {
-    const style = document.createElement('style');
-    document.head.appendChild(style);
-
-    // Main menu styles
-    style.sheet.insertRule(`
-      #nav ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-      }
-    `);
-
-    style.sheet.insertRule(`
-      #nav li {
-        position: relative;
-      }
-    `);
-
-    style.sheet.insertRule(`
-      #nav li a {
-        display: block;
-        padding: 5px 15px;
-        font-weight: bold;
-        color: ${colorLookup.white};
-        text-shadow: 1px 1px ${colorLookup.softBlack};
-        border-bottom: solid;
-        border-radius: 4px;
-        background-color: ${colorLookup.vibrantOrange};
-        transition: all .2s ease-in-out;
-      }
-    `);
-
-    style.sheet.insertRule(`
-      #nav li a:hover, #nav li a.active {
-        background-color: ${colorLookup.deepGreen};
-        transform: translateY(-4px);
-      }
-    `);
-
-    // Submenu styles
-    style.sheet.insertRule(`
-      #nav li ul {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background-color: ${colorLookup.vibrantOrange};
-        border-radius: 4px;
-        padding: 5px;
-      }
-    `);
-
-    style.sheet.insertRule(`
-      #nav li:hover > ul {
-        display: block;
-      }
-    `);
-
-    style.sheet.insertRule(`
-      #nav li ul li a {
-        color: ${colorLookup.white};
-        text-decoration: none;
-        padding: 5px 15px;
-        display: block;
-      }
-    `);
-
-    style.sheet.insertRule(`
-      #nav li ul li a:hover {
-        background-color: ${colorLookup.deepGreen};
-      }
-    `);
-  });
-</script>
-
+    <!-- Navigation Menu -->
+    <nav>
+        <menu>
+            <!-- Top-level Menu Items -->
+            <menuitem id="demo1">
+                <a>drop</a>
+                <menu>
+                    <!-- Submenu Items -->
+                    <menuitem><a>about</a></menuitem>
+                    <menuitem>
+                        <a>settings</a>
+                        <!-- Nested Submenu -->
+                        <menu>
+                            <menuitem><a>Test 1</a></menuitem>
+                            <menuitem><a>Test 2</a></menuitem>
+                            <menuitem><a>Test 3</a></menuitem>
+                            <menuitem><a>Test 4</a></menuitem>
+                        </menu>  
+                    </menuitem>
+                    <menuitem><a>help</a></menuitem>
+                    <menuitem id="demo2">
+                        <a>more</a>
+                        <menu>
+                            <!-- Deeper Submenu -->
+                            <menuitem id="demo3">
+                                <a>deeper</a>
+                                <menu>
+                                    <menuitem><a>deep 1</a></menuitem>
+                                    <menuitem><a>deep 2</a></menuitem>
+                                    <menuitem><a>deep 3</a></menuitem>
+                                </menu>
+                            </menuitem>
+                            <menuitem><a>test</a></menuitem>
+                        </menu>
+                    </menuitem>
+                </menu>
+            </menuitem>
+            <menuitem><a>no drop</a></menuitem>
+        </menu>
+    </nav>
 </body>
 </html>
