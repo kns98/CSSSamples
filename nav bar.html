@@ -9,11 +9,19 @@
 
 <div id="nav">
   <ul>
-    <li><a href="home.html">Home</a></li>
-    <li><a href="things.html">Things</a></li>
-    <li><a href="stuff.html">Stuff</a></li>
-    <li><a href="junk.html">Junk</a></li>
-    <li><a href="about.html">About</a></li>
+    <li><a href="home.html">Home</a>
+      <ul>
+        <li><a href="sublink1.html">Sublink 1</a></li>
+        <li><a href="sublink2.html">Sublink 2</a></li>
+      </ul>
+    </li>
+    <li><a href="things.html">Things</a>
+      <ul>
+        <li><a href="thing1.html">Thing 1</a></li>
+        <li><a href="thing2.html">Thing 2</a></li>
+      </ul>
+    </li>
+    <!-- ... other main menu items ... -->
   </ul>
 </div>
 
@@ -35,10 +43,18 @@
     const style = document.createElement('style');
     document.head.appendChild(style);
 
+    // Main menu styles
     style.sheet.insertRule(`
       #nav ul {
         list-style-type: none;
         margin: 0;
+        padding: 0;
+      }
+    `);
+
+    style.sheet.insertRule(`
+      #nav li {
+        position: relative;
       }
     `);
 
@@ -60,6 +76,40 @@
       #nav li a:hover, #nav li a.active {
         background-color: ${colorLookup.deepGreen};
         transform: translateY(-4px);
+      }
+    `);
+
+    // Submenu styles
+    style.sheet.insertRule(`
+      #nav li ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: ${colorLookup.vibrantOrange};
+        border-radius: 4px;
+        padding: 5px;
+      }
+    `);
+
+    style.sheet.insertRule(`
+      #nav li:hover > ul {
+        display: block;
+      }
+    `);
+
+    style.sheet.insertRule(`
+      #nav li ul li a {
+        color: ${colorLookup.white};
+        text-decoration: none;
+        padding: 5px 15px;
+        display: block;
+      }
+    `);
+
+    style.sheet.insertRule(`
+      #nav li ul li a:hover {
+        background-color: ${colorLookup.deepGreen};
       }
     `);
   });
