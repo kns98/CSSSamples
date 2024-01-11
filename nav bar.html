@@ -1,38 +1,8 @@
-<!-- index.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    /* CSS styles embedded here */
-    #nav ul {
-      list-style-type: none;
-      margin: 0;
-    }
-
-    #nav li a {
-      display: block;
-      padding: 5px 15px;
-      font-weight: bold;
-      color: #fff;
-      text-shadow: 1px 1px rgba(0, 0, 0, .5);
-      border-bottom: solid;
-      border-radius: 4px;
-      background-color: #ff9900;
-      transition: all .3s ease-in-out;
-    }
-
-    #nav li a:hover {
-      background-color: #04AA6D;
-      transform: translateY(-4px);
-    }
-
-    #nav li a.active {
-      background-color: #04AA6D;
-    }
-  </style>
   <title>Your Website</title>
 </head>
 <body>
@@ -52,6 +22,48 @@
 <img src="logo2.png" alt="Logo 2">
 
 <!-- Your website content goes here -->
+
+<script>
+  const colorLookup = {
+    'vibrantOrange': '#ff9900',
+    'deepGreen': '#04AB6D',
+    'white': '#ffffff',
+    'softBlack': 'rgba(0, 0, 0, 0.5)'
+  };
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const style = document.createElement('style');
+    document.head.appendChild(style);
+
+    style.sheet.insertRule(`
+      #nav ul {
+        list-style-type: none;
+        margin: 0;
+      }
+    `);
+
+    style.sheet.insertRule(`
+      #nav li a {
+        display: block;
+        padding: 5px 15px;
+        font-weight: bold;
+        color: ${colorLookup.white};
+        text-shadow: 1px 1px ${colorLookup.softBlack};
+        border-bottom: solid;
+        border-radius: 4px;
+        background-color: ${colorLookup.vibrantOrange};
+        transition: all .2s ease-in-out;
+      }
+    `);
+
+    style.sheet.insertRule(`
+      #nav li a:hover, #nav li a.active {
+        background-color: ${colorLookup.deepGreen};
+        transform: translateY(-4px);
+      }
+    `);
+  });
+</script>
 
 </body>
 </html>
